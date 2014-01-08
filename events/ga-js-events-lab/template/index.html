@@ -18,11 +18,37 @@
 			<header>
 			</header>
 			<div class="clearfix">
-				
+				<h1 onclick="changeText()">My name is Jane</h1>
+				<input type="text" onchange="upperCaseAll(this)">
+				<div id="mouseoverbox">Not moused over</div>
 			</div>
 			<footer>
 				&copy; Footer Goes Here
 			</footer>
-		</div><!-- #container --> 
+		</div><!-- #container -->
+		<script type="text/javascript">
+			function changeText(){
+				document.getElementsByTagName("h1")[0].innerHTML="notReally"
+			}
+			function upperCaseAll(node){
+				node.value=node.value.toUpperCase();
+			}
+			document.getElementById("mouseoverbox").addEventListener("mouseenter",function(e){
+				console.log(e,this)
+				e.target.innerHTML="I'm moused over";
+			},false)
+			document.getElementById("mouseoverbox").addEventListener("mouseleave",handleMouseLeave,false);
+			function handleMouseLeave(e){
+				this.innerHTML="Not moused over";
+			}
+		</script>
+		<style type="text/css">
+		#mouseoverbox{
+			background:red;
+			color:white;
+			width:200px;
+			height:200px;
+		}
+		</style>
 	</body>
 </html>
