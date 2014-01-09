@@ -77,3 +77,9 @@ footer {
 .hide{
      display:none;
 }
+.show{
+     display:block;
+}
+.selected{
+     background-color: red;
+}

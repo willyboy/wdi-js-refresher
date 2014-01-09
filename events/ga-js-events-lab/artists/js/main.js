@@ -1,20 +1,38 @@
-var artists=document.getElementById("artists").childNodes;
-findNodes(artists,function(artist){
+var artistInfo={};
+Object.defineProperties(artistInfo,{
+	"artists":{
+		get:function(){
+			return document.getElementById("artists").childNodes;
+		},
+		enumerable:true
+	},
+	"descriptions":{
+		get:function(){
+			return document.querySelectorAll("#artists~div");
+		},
+		enumerable:true
+	}
+});
+findNodes(artistInfo.artists,function(artist){
 	artist.addEventListener("click",selectArtist,true);
 });
+
 function selectArtist(e){
-	findNodes(artists,function(artist){
-		artist.style.backgroundColor="white";		
-	});
-	this.style.backgroundColor="red";
-	findNodes(document.querySelectorAll("#artists~div"),function(desc){
-		desc.style.display="none";
-	})
-	document.querySelectorAll("#artists~div")[
+	clearSelectedArtist();
+	this.className="selected";
+	artistInfo.descriptions[
 		Array.prototype.slice.call(
 			document.querySelectorAll("#artists>li")
 		).indexOf(this)
-	].style.display="block";
+	].className="show";
+}
+function clearSelectedArtist(){
+	findNodes(artistInfo.artists,function(artist){
+		artist.className="";
+	});
+	findNodes(artistInfo.descriptions,function(desc){
+		desc.className="hide";
+	});
 }
 function findNodes(nodes,callback){
 	for(var i=0; i<nodes.length; i++){
