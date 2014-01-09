@@ -2,7 +2,7 @@ var artistInfo={};
 Object.defineProperties(artistInfo,{
 	"artists":{
 		get:function(){
-			return document.getElementById("artists").childNodes;
+			return findNodes(document.getElementById("artists").childNodes);
 		},
 		enumerable:true
 	},
@@ -13,17 +13,32 @@ Object.defineProperties(artistInfo,{
 		enumerable:true
 	}
 });
-findNodes(artistInfo.artists,function(artist){
-	artist.addEventListener("click",selectArtist,true);
-});
+document.getElementById("artists").addEventListener("click",selectArtist,false)
+/*addEvents();
+function addEvents(){
+	findNodes(artistInfo.artists,function(artist){
+		artist.addEventListener("click",selectArtist,true);
+	});
+}*/
 
+document.getElementsByTagName("form")[0].addEventListener("submit",function(e){
+	var artistName=document.getElementById("artist-name").value,artistDesc=document.getElementById("artist-description").value;
+	var li=document.createElement("li"),div=document.createElement("div");
+	div.innerHTML=artistDesc;
+	div.className="hide";
+	li.innerHTML=artistName;
+	document.getElementById("artists").appendChild(li);
+	document.getElementsByClassName("clearfix")[0].appendChild(div)
+},
+false)
 function selectArtist(e){
+	if(e.target.tagName!="LI") return false;
 	clearSelectedArtist();
-	this.className="selected";
+	e.target.className="selected";
 	artistInfo.descriptions[
 		Array.prototype.slice.call(
-			document.querySelectorAll("#artists>li")
-		).indexOf(this)
+			artistInfo.artists
+		).indexOf(e.target)
 	].className="show";
 }
 function clearSelectedArtist(){
@@ -35,9 +50,12 @@ function clearSelectedArtist(){
 	});
 }
 function findNodes(nodes,callback){
+	var arr=[];
 	for(var i=0; i<nodes.length; i++){
 		if(nodes[i].nodeType!=3){
-			callback(nodes[i]);
+			arr.push(nodes[i]);
+			if(callback) callback(nodes[i]);
 		}
 	}
+	return arr;
 }
