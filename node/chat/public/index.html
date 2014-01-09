@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+    	<meta charset="utf-8">
+    	<meta name="description" content="Your description goes here">
+    	<meta name="keywords" content="one, two, three">
+	
+		<title>Blank Template</title>
+		
+		<!-- external CSS link -->
+		<link rel="stylesheet" href="css/normalize.css">
+		<link rel="stylesheet" href="css/style.css">
+		
+		<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+		<script src="../socket.io/socket.io.js"></script>
+	</head>
+	<body>
+		<div id="container">
+			<header>
+			</header>
+			<div>
+				<form action="javascript:void(0)">
+					<input type="number" id="room-num">
+					<input type="submit" value="Join Chat Room">
+				</form>
+				<form action="javascript:void(0)">
+					<input type="text" id="message">
+					<input type="submit" value="Send message">
+				</form>
+			</div>
+			<footer>
+				&copy; Footer Goes Here
+			</footer>
+		</div><!-- #container --> 
+		<script type="text/javascript">
+		var socket=io.connect('http://localhost:3000');
+		socket.on("MessageSent",function(message){
+			var div=document.createElement("div");
+			div.innerHTML=message;
+			document.getElementsByTagName("body")[0].appendChild(div);
+		})
+		document.forms[0].addEventListener("submit",joinChatRoom,false);
+		document.forms[1].addEventListener("submit",sendMessage,false);
+		function joinChatRoom(){
+			var roomNum=document.getElementById("room-num").value;
+			socket.emit('JoinRoom',roomNum);
+		}
+		function sendMessage(){
+			var message=document.getElementById("message").value;
+			socket.emit('Message',{
+				room:document.getElementById("room-num").value,
+				message:message
+			});
+		}
+		</script>
+	</body>
+</html>
