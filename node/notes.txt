@@ -1,12 +1,16 @@
 Directions: 
-brew install node
-npm install express -g
 
-navigate to desktop
-mkdir test-express
-npm install express
-npm install jade
-node app.js
+1) brew install node
+2) npm install express -g
+3) mkdir test-express (wherever you want to create app)
+4) Navigate to test-express (cd test-express)
+5) express
+6) npm install express
+7) npm install jade
+8) node app.js
+9) go to localhost:3000
+
+10) npm install socket.io
 
 Things to touch on
 1) show how to serve a file without jade
