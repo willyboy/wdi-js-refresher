@@ -1,0 +1,5 @@
+bubble phase vs capture phase
+http://www.quirksmode.org/js/events_order.html
+
+socket io rooms
+https://github.com/LearnBoost/socket.io/wiki/Rooms
