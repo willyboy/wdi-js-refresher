@@ -1,0 +1,34 @@
+Directions: 
+brew install node
+npm install express -g
+
+navigate to desktop
+mkdir test-express
+npm install express
+npm install jade
+node app.js
+
+Things to touch on
+1) show how to serve a file without jade
+2) require module
+3) a) ./ for files you create b) module name for modules
+
+Websockets
+1) client: 
+../socket.io/socket.io.js
+socket = io.connect('http://node.piecewise.com:8888');
+socket.on('connect', function () {
+	socket.emit('JoinProject',{ProjectID:ProjectID});
+});
+2) server:
+var io = require('socket.io').listen(server,{log: 0});
+io.enable('browser client minification');  // send minified client
+io.enable('browser client etag');          // apply etag caching logic based on version number
+io.enable('browser client gzip');
+io.sockets.on('connection', function (socket) {
+	socket.join(data.ProjectID);
+	socket.on('ProjectDescription',function(data){
+
+socket.broadcast.to(data.ProjectID).emit("ProjectDescription",Description);
+});
+});
