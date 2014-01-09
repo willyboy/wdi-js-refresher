@@ -1,5 +1,8 @@
 bubble phase vs capture phase
 http://www.quirksmode.org/js/events_order.html
 
+defineProperty
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty
+
 socket io rooms
 https://github.com/LearnBoost/socket.io/wiki/Rooms
